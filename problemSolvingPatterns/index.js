@@ -63,8 +63,6 @@ function checkAnagram(str1, str2) {
 }
 
 // MULTIPLE POINTERS APPROACH
-// this pattern is used to solve problems where we need to find a subset of elements in an array that satisfy a certain condition
-// this pattern is used to find the longest substring of a string that is the same in reverse
 
 function sumZero(arr) {
   for (let i = 0; i < arr.length; i++) {
@@ -90,4 +88,82 @@ function refactorSumZero(arr) {
       }
     }
   }
+}
+
+function countUniqueValues(arr) {
+  let i = 0;
+  for (let j = 1; j < arr.length; j++) {
+    if (arr[i] !== arr[j]) {
+      i++;
+      arr[i] = arr[j];
+    }
+  }
+  return i + 1;
+}
+function refactorCountUniqueValues(arr) {
+  return [...new Set(arr)].length;
+}
+
+// sliding window approach
+function windowSlide(arr, n) {
+  if (arr.length < n) {
+    return null;
+  }
+  let res = arr
+    .sort((a, b) => b - a)
+    .slice(0, n)
+    .reduce((acc, curr) => acc + curr);
+  return res;
+}
+console.log(windowSlide([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5));
+
+// divide and conquer approach
+
+function search(arr, n) {
+  if (arr.length === 0) {
+    return -1;
+  }
+  let mid = Math.floor(arr.length / 2);
+  if (arr[mid] === n) {
+    return mid;
+  }
+  if (arr[mid] > n) {
+    return search(arr.slice(0, mid), n);
+  }
+  return search(arr.slice(mid + 1), n);
+}
+
+function refactorSearch(arr, n) {
+  if (arr.length === 0) {
+    return -1;
+  }
+  if (arr.indexOf(n) !== -1) {
+    return arr.indexOf(n);
+  } else {
+    return -1;
+  }
+}
+function refactorSearch2(arr, n) {
+  return arr.find(el => el === n) ?? -1;
+}
+
+// SAMPLE
+
+function sameFrequency(num1, num2) {
+  let str1 = num1.toString();
+  let str2 = num2.toString();
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  let obj = {};
+  for (let i = 0; i < str1.length; i++) {
+    obj[str1[i]] = (obj[str1[i]] || 0) + 1;
+  }
+  for (let i = 0; i < str2.length; i++) {
+    if (!obj[str2[i]]) {
+      return false;
+    }
+    obj[str2[i]]--;
+  }
+  return true;
 }
