@@ -5,9 +5,9 @@ function addUpTo(n) {
     total += i;
   }
   return total;
-}
+} //5n + 2 operations (n is the number of iterations) O(n)
 
 // sample 2
 function addUpTo2(n) {
   return (n * (n + 1)) / 2;
-}
+} // 3 operations (n is the number of iterations) O(1)
