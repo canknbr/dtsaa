@@ -43,3 +43,51 @@ function refactorSame(arr1, arr2) {
   }
   return true;
 }
+
+function checkAnagram(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  let obj = {};
+  for (let i = 0; i < str1.length; i++) {
+    obj[str1[i]] = (obj[str1[i]] || 0) + 1;
+  }
+  for (let i = 0; i < str2.length; i++) {
+    let letter = str2[i];
+    if (!obj[letter]) {
+      return false;
+    }
+    obj[letter]--;
+  }
+  return true;
+}
+
+// MULTIPLE POINTERS APPROACH
+// this pattern is used to solve problems where we need to find a subset of elements in an array that satisfy a certain condition
+// this pattern is used to find the longest substring of a string that is the same in reverse
+
+function sumZero(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; arr.length; j++) {
+      if (arr[i] + arr[j] === 0) {
+        return [arr[i], arr[j]];
+      }
+    }
+  }
+}
+function refactorSumZero(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let left = 0;
+    let right = arr.length - 1;
+    while (left < right) {
+      let sum = arr[left] + arr[right];
+      if (sum === 0) {
+        return [arr[left], arr[right]];
+      } else if (sum > 0) {
+        right--;
+      } else {
+        left++;
+      }
+    }
+  }
+}
