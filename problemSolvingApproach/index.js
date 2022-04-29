@@ -35,3 +35,36 @@ function charCount(str) {
   }
   return obj;
 }
+
+// solve the problem
+// solve the problem if you can't solve it with the given input and solve simple problem
+
+//  refactor the code
+//  1. identify the inputs and outputs
+//  2. create a function declaration
+//  3. refactor the function
+//  4. test the function
+
+function refactorCharCountApproach1(str) {
+  let obj = {};
+  for (let char of str) {
+    char = char.toLowerCase();
+    obj[char] = ++obj[char] || 1;
+  }
+  return obj;
+}
+
+function refactorCharCountApproach2(str) {
+  let obj = {};
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i].toLowerCase();
+    if (/[a-z]/.test(char)) {
+      if (char in obj) {
+        obj[char]++;
+      } else {
+        obj[char] = 1;
+      }
+    }
+  }
+  return obj;
+}
